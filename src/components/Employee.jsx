@@ -3,7 +3,6 @@ import { DragSource } from 'react-dnd';
 
 const cardSource = {
   beginDrag({emp}) {
-    console.log('emp being dragged is', emp)
     return {
       employee: emp
     };
