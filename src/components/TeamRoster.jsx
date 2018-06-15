@@ -6,6 +6,7 @@ const comparisonTarget = {
   drop(props, monitor) {
     console.log('props are', props)
     console.log('item being dropped is', monitor.getItem())
+    props.addMember(props.team, monitor.getItem())
   }
 };
 
@@ -27,7 +28,7 @@ const members = (team, removeMember) => team.members.map(member => (
 ));
 
 const TeamRoster = (props) => {
-  const { team, removeMember, connectDropTarget } = props;
+  const { team, removeMember, addMember, connectDropTarget } = props;
 
   return connectDropTarget(
     <div className="team-table" key={team.id}>

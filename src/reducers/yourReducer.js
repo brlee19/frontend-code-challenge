@@ -34,6 +34,17 @@ export default function (state = initialState, action) {
       return {...state, teams};
     }
 
+    case 'ADD_MEMBER': {
+      const teams = [...state.teams];
+      const team = teams.find(t => t.id === action.payload.team.id);
+      const memberN = team.members.findIndex(m => m.id === action.payload.member.id);
+      if (memberN === -1) {
+        team.members.push(action.payload.member.employee);
+      }
+      console.log('new state', {...state, teams})
+      return {...state, teams};
+    }
+
     default:
       return state;
   }

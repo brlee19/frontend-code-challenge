@@ -5,7 +5,7 @@ import { bindActionCreators, compose } from 'redux';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-import { selectTeam, removeMember, fetchData } from '../../actions/teams';
+import { selectTeam, removeMember, fetchData, addMember } from '../../actions/teams';
 import EmployeeList from '../../components/EmployeeList';
 import TeamList from '../../components/TeamList';
 import TeamRosterList from '../../components/TeamRosterList';
@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   render() {
-    const { isLoading, teams, employees, removeMember, selectTeam } = this.props;
+    const { isLoading, teams, employees, removeMember, selectTeam, addMember } = this.props;
     return isLoading ? <Spinner/> : (
       <div className="App">
         <div className="App-header">
@@ -26,7 +26,7 @@ class App extends Component {
         </div>
         <div className="wrapper">
           <div className="teams-container">
-            <TeamRosterList teams={teams} removeMember={removeMember}/>
+            <TeamRosterList teams={teams} removeMember={removeMember} addMember={addMember}/>
           </div>
           <div className="tools">
             <TeamList teams={teams} handleClick={selectTeam}/>
@@ -52,6 +52,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     selectTeam: bindActionCreators(selectTeam, dispatch),
     removeMember: bindActionCreators(removeMember, dispatch),
+    addMember: bindActionCreators(addMember, dispatch),
     fetchData: bindActionCreators(fetchData, dispatch),
   };
 };
