@@ -1,5 +1,5 @@
 import React from 'react';
-import '../containers/App/App.css'
+import '../containers/App/App.css';
 
 const createTeamsTable = (teams, removeMember) => {
   const members = team => team.members.map(member => (

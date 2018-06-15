@@ -20,6 +20,10 @@
   position: relative;
 }
 
+.spinner {
+  padding: 20px;
+  display: inline-block;
+}
 
 .teams-container {
   width:  70%;
