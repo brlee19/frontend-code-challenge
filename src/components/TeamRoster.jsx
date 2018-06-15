@@ -4,8 +4,6 @@ import { DropTarget } from 'react-dnd';
 
 const comparisonTarget = {
   drop(props, monitor) {
-    console.log('props are', props)
-    console.log('item being dropped is', monitor.getItem())
     props.addMember(props.team, monitor.getItem())
   }
 };

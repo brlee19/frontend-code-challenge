@@ -28,7 +28,12 @@ const TeamRosterList = (props) => {
   const { teams, removeMember, addMember } = props;
   return (
     <div>
-      {teams.filter(team => team.selected).map((team) => <TeamRoster team={team} removeMember={removeMember} addMember={addMember}/>)}
+      {teams.filter(team => team.selected).map((team) => <TeamRoster
+                                                          team={team}
+                                                          removeMember={removeMember}
+                                                          addMember={addMember}
+                                                          key={team.id}
+                                                          />)}
     </div>
   )
 };
