@@ -8,7 +8,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { selectTeam, removeMember, fetchData } from '../../actions/teams';
 import EmployeeList from '../../components/EmployeeList';
 import TeamList from '../../components/TeamList';
-import TeamRoster from '../../components/TeamRoster';
+import TeamRosterList from '../../components/TeamRosterList';
 import Spinner from '../../components/Spinner';
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
         </div>
         <div className="wrapper">
           <div className="teams-container">
-            <TeamRoster teams={teams} removeMember={removeMember}/>
+            <TeamRosterList teams={teams} removeMember={removeMember}/>
           </div>
           <div className="tools">
             <TeamList teams={teams} handleClick={selectTeam}/>
