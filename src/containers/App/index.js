@@ -3,7 +3,7 @@ import './App.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {selectTeam, removeMember, fetchData} from '../../actions/teams';
-
+import EmployeeList from '../../components/EmployeeList'
 
 class App extends Component {
 
@@ -52,12 +52,7 @@ class App extends Component {
                 {this.props.teams.map(team => <li onClick={this.props.selectTeam.bind(this, team)} className={`team-item ${team.selected ? 'selected': ''}`} key={team.id}>{team.name} ({team.members.length})</li>)}
               </ul>
             </div>
-            <div className="devs">
-              <h3>Employees</h3>
-              <ul className="list">
-                {this.props.employees.map(emp => <li className="emp-item" key={emp.id}>{emp.name} - <span className="position">{emp.position.name}</span></li>)}
-              </ul>
-            </div>
+            <EmployeeList employees={this.props.employees}/>
           </div>
         </div>
       </div>

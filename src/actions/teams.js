@@ -3,6 +3,7 @@ import _fetchData from '..//utils/backend-mock';
 export const fetchData = () => {
   return dispatch => {
     _fetchData.then(data => {
+      console.log('data is', JSON.stringify(data))
       dispatch({
         type: 'DATA_FETCHED',
         payload: data
