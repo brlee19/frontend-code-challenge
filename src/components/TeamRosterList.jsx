@@ -1,20 +1,6 @@
 import React from 'react';
-import { DropTarget } from 'react-dnd';
 import '../containers/App/App.css';
-
-const comparisonTarget = {
-  drop(props, monitor) {
-    console.log('props are', props.teams)
-    console.log('item being dropped is', monitor.getItem())
-  }
-};
-
-const collect = (connect, monitor) => {
-  return {
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver()
-  };
-};
+import TeamRoster from './TeamRoster.jsx';
 
 const createTeamsTable = (teams, removeMember) => {
   const members = team => team.members.map(member => (
@@ -39,12 +25,12 @@ const createTeamsTable = (teams, removeMember) => {
 }
 
 const TeamRosterList = (props) => {
-  const { teams, removeMember, connectDropTarget} = props;
-  return connectDropTarget(
-    teams.length ? (<div className="teams-container">
-                    {createTeamsTable(teams, removeMember)}
-                    </div>) : null
+  const { teams, removeMember } = props;
+  return (
+    <div>
+      {teams.filter(team => team.selected).map((team) => <TeamRoster team={team} removeMember={removeMember}/>)}
+    </div>
   )
 };
 
-export default DropTarget('employee', comparisonTarget, collect)(TeamRosterList);
+export default TeamRosterList;
