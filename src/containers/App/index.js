@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {selectTeam, removeMember, fetchData} from '../../actions/teams';
-import EmployeeList from '../../components/EmployeeList'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { selectTeam, removeMember, fetchData } from '../../actions/teams';
+import EmployeeList from '../../components/EmployeeList';
+import TeamList from '../../components/TeamList';
+import TeamRoster from '../../components/TeamRoster';
 
 class App extends Component {
 
@@ -11,30 +13,8 @@ class App extends Component {
     this.props.fetchData();
   }
 
-  getTeams() {
-    const members = team => team.members.map(member => (
-      <div key={member.id} className="table__row">
-        <div className="table__cell">{member.name}</div>
-        <div className="table__cell fixed">{member.position.name}</div>
-        <div className="table__cell fixed">
-          <button onClick={this.props.removeMember.bind(this, team, member)}>X</button>
-        </div>
-      </div>
-    ));
-    const tables = this.props.teams.filter(team => team.selected).map(team => (
-      <div className="team-table" key={team.id}>
-        <h2>{team.name} ({team.members.length})</h2>
-        <div className="table">
-          {members(team)}
-        </div>
-      </div>
-    ));
-    return tables;
-  }
-
-
   render() {
-    const teams = this.getTeams();
+    const { teams, employees, removeMember, selectTeam} = this.props;
 
     return (
       <div className="App">
@@ -43,16 +23,11 @@ class App extends Component {
         </div>
         <div className="wrapper">
           <div className="teams-container">
-            {teams}
+            <TeamRoster teams={teams} removeMember={removeMember}/>
           </div>
           <div className="tools">
-            <div className="teams">
-              <h3>Teams</h3>
-              <ul className="list">
-                {this.props.teams.map(team => <li onClick={this.props.selectTeam.bind(this, team)} className={`team-item ${team.selected ? 'selected': ''}`} key={team.id}>{team.name} ({team.members.length})</li>)}
-              </ul>
-            </div>
-            <EmployeeList employees={this.props.employees}/>
+            <TeamList teams={teams} handleClick={selectTeam}/>
+            <EmployeeList employees={employees}/>
           </div>
         </div>
       </div>
