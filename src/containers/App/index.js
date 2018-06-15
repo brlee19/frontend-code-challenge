@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import MDSpinner from 'react-md-spinner';
+
 import { selectTeam, removeMember, fetchData } from '../../actions/teams';
 import EmployeeList from '../../components/EmployeeList';
 import TeamList from '../../components/TeamList';
@@ -14,12 +16,13 @@ class App extends Component {
   }
 
   render() {
-    const { teams, employees, removeMember, selectTeam} = this.props;
-
-    return (
+    const { isLoading, teams, employees, removeMember, selectTeam } = this.props;
+    console.log('is loading?', isLoading)
+    return isLoading ? <MDSpinner/> : (
       <div className="App">
         <div className="App-header">
           <h2>Some unremarkable IT-Team</h2>
+          <pre>IS LOADING? {isLoading}</pre>
         </div>
         <div className="wrapper">
           <div className="teams-container">
@@ -38,6 +41,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    isLoading: state.data.isLoading,
     teams: state.data.teams,
     positions: state.data.positions,
     employees: state.data.employees

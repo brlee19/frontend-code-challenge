@@ -1,4 +1,5 @@
 const initialState = {
+  isLoading: true,
   teams: [],
   positions: [],
   employees: []
@@ -9,7 +10,8 @@ export default function (state = initialState, action) {
 
     case 'DATA_FETCHED': {
       return {
-        ...action.payload
+        ...action.payload,
+        isLoading: false
       }
     }
 
