@@ -24,7 +24,9 @@ const createTeamsTable = (teams, removeMember) => {
 }
 
 const TeamRoster = ({teams, removeMember}) => (
-  teams.length ? <div className="teams-container">{createTeamsTable(teams, removeMember)}</div> : null
+  teams.length ? (<div className="teams-container">
+                  {createTeamsTable(teams, removeMember)}
+                  </div>) : null
 );
 
 export default TeamRoster;
