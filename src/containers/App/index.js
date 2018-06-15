@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
+import { bindActionCreators, compose } from 'redux';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 import { selectTeam, removeMember, fetchData } from '../../actions/teams';
 import EmployeeList from '../../components/EmployeeList';
@@ -55,4 +56,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default compose(
+  DragDropContext(HTML5Backend),
+  connect(mapStateToProps, mapDispatchToProps)
+)(App);
