@@ -1,10 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const EmployeeList = ({employees}) => (
+const EmployeeList = (props) => (
   <div className="devs">
     <h3>Employees</h3>
     <ul className="list">
-      {employees.map(emp => (
+      {props.employees.map(emp => (
         <li className="emp-item" key={emp.id}>
           {emp.name} -
           <span className="position">
@@ -16,4 +17,10 @@ const EmployeeList = ({employees}) => (
   </div>
 );
 
-export default EmployeeList;
+const mapStateToProps = (state) => {
+  return {
+    employees: state.data.employees
+  }
+};
+
+export default connect(mapStateToProps)(EmployeeList);

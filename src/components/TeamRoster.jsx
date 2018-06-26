@@ -1,5 +1,9 @@
 import React from 'react';
-import '../containers/App/App.css'
+import '../containers/App/App.css';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { removeMember } from '../actions/teams';
 
 const createTeamsTable = (teams, removeMember) => {
   const members = team => team.members.map(member => (
@@ -23,10 +27,23 @@ const createTeamsTable = (teams, removeMember) => {
   return tables;
 }
 
-const TeamRoster = ({teams, removeMember}) => (
-  teams.length ? (<div className="teams-container">
+const TeamRoster = (props) => {
+  const {teams, removeMember} = props;
+  return teams.length ? (<div className="teams-container">
                   {createTeamsTable(teams, removeMember)}
                   </div>) : null
-);
+};
 
-export default TeamRoster;
+const mapStateToProps = (state) => {
+  return {
+    teams: state.data.teams
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeMember: bindActionCreators(removeMember, dispatch)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamRoster);

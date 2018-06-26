@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectTeam, removeMember, fetchData } from '../../actions/teams';
+import { fetchData } from '../../actions/teams';
 import EmployeeList from '../../components/EmployeeList';
 import TeamList from '../../components/TeamList';
 import TeamRoster from '../../components/TeamRoster';
@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   render() {
-    const { teams, employees, removeMember, selectTeam} = this.props;
+    const { employees } = this.props;
 
     return (
       <div className="App">
@@ -23,10 +23,10 @@ class App extends Component {
         </div>
         <div className="wrapper">
           <div className="teams-container">
-            <TeamRoster teams={teams} removeMember={removeMember}/>
+            <TeamRoster />
           </div>
           <div className="tools">
-            <TeamList teams={teams} handleClick={selectTeam}/>
+            <TeamList />
             <EmployeeList employees={employees}/>
           </div>
         </div>
@@ -38,17 +38,13 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    teams: state.data.teams,
-    positions: state.data.positions,
     employees: state.data.employees
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    selectTeam: bindActionCreators(selectTeam, dispatch),
-    removeMember: bindActionCreators(removeMember, dispatch),
-    fetchData: bindActionCreators(fetchData, dispatch),
+    fetchData: bindActionCreators(fetchData, dispatch)
   };
 };
 
