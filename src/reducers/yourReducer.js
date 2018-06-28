@@ -1,23 +1,29 @@
 const initialState = {
   teams: [],
   positions: [],
-  employees: []
+  employees: [],
+  isLoading: false
 };
 
 export default function (state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
+    case 'REQUEST_DATA': {
+      return {...state, isLoading: true}
+    }
 
-    case 'DATA_FETCHED': {
+    case 'RECEIVE_DATA': {
       return {
-        ...action.payload
+        teams: action.payload.teams,
+        positions: action.payload.positions,
+        employees: action.payload.employees,
+        isLoading: false
       }
     }
 
     case 'TEAM_SELECTED': {
-      const teams = [...state.teams];
-      teams.forEach(team => {
-        team.selected = (team.id === action.payload.id ? !team.selected : team.selected);
-      });
+      const teams = [...state.teams].map(team => (
+       team.id === action.payload.id ? {...team, selected: !team.selected} : {...team} 
+      ));
       return {...state, teams};
     }
 

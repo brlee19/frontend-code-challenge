@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { selectTeam } from '../actions/teams';
 
 const TeamList = (props) => {
@@ -29,7 +28,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    selectTeam: bindActionCreators(selectTeam, dispatch)
+    selectTeam: (team) => {
+      dispatch(selectTeam(team));
+    }
   };
 };
 

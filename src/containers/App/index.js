@@ -3,6 +3,7 @@ import './App.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchData } from '../../actions/teams';
+
 import EmployeeList from '../../components/EmployeeList';
 import TeamList from '../../components/TeamList';
 import TeamRoster from '../../components/TeamRoster';
@@ -14,8 +15,6 @@ class App extends Component {
   }
 
   render() {
-    const { employees } = this.props;
-
     return (
       <div className="App">
         <div className="App-header">
@@ -27,14 +26,13 @@ class App extends Component {
           </div>
           <div className="tools">
             <TeamList />
-            <EmployeeList employees={employees}/>
+            <EmployeeList />
           </div>
         </div>
       </div>
     );
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

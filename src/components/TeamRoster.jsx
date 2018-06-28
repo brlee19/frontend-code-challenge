@@ -2,7 +2,6 @@ import React from 'react';
 import '../containers/App/App.css';
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { removeMember } from '../actions/teams';
 
 const createTeamsTable = (teams, removeMember) => {
@@ -42,7 +41,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeMember: bindActionCreators(removeMember, dispatch)
+    removeMember: (team, member) => {
+      dispatch(removeMember(team, member))
+    }
   };
 };
 
